@@ -15,6 +15,12 @@ class QuestionsService {
     const newQuestions = response.data.results.map(pojo => new Question(pojo))
     AppState.questions = newQuestions
     console.log(AppState.questions);
+    this.setActiveQuestion()
+  }
+
+  setActiveQuestion() {
+    const firstQuestion = AppState.questions.shift()
+    AppState.activeQuestion = firstQuestion
   }
 
 }

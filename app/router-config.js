@@ -9,7 +9,7 @@ export const router = new Router([
   {
     path: '',
     controllers: [QuestionsController],
-    view: ''
+    view: 'app/views/HomeView.html'
   },
   {
     path: '#/about',
