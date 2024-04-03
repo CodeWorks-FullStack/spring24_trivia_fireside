@@ -26,4 +26,8 @@ export class QuestionsController {
 
     setHTML('currentQuestion', question.CurrentQuestionTemplate)
   }
+
+  guessAnswer(answer) {
+    console.log(answer);
+  }
 }

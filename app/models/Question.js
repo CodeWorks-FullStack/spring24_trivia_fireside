@@ -14,9 +14,25 @@ export class Question {
       <h2>${this.question}</h2>
       <h3>Category: ${this.category} || Difficulty: ${this.difficulty}</h3>
       <div>
-        <button class="btn btn-success">1</button>
+        ${this.AnswerButtons}
       </div>
     </div>
     `
+  }
+
+  get AnswerButtons() {
+    const answers = [...this.incorrectAnswers]
+
+    const randomIndex = Math.floor(Math.random() * (answers.length + 1))
+
+    answers.splice(randomIndex, 0, this.correctAnswer)
+
+    let htmlString = ''
+
+    answers.forEach(answer => htmlString += `
+    <button onclick="app.QuestionsController.guessAnswer('${answer}')" class="btn btn-success">${answer}</button>
+    `)
+
+    return htmlString
   }
 }
