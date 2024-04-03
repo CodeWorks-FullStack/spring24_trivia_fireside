@@ -1,5 +1,6 @@
 import { AppState } from "../AppState.js";
 import { Question } from "../models/Question.js";
+import { Pop } from "../utils/Pop.js";
 
 // @ts-ignore
 const triviaApi = axios.create({
@@ -9,6 +10,16 @@ const triviaApi = axios.create({
 
 
 class QuestionsService {
+  checkAnswer(answer) {
+    const question = AppState.activeQuestion
+    if (question.correctAnswer == answer) {
+      Pop.success("YOU GOT IT RIGHT BUDDY")
+      this.setActiveQuestion()
+    }
+    else {
+      Pop.error("YOU GOT IT WRONG BUDDY")
+    }
+  }
   async getQuestions() {
     const response = await triviaApi.get()
     console.log('❓🤔 GOT QUESTIONS', response);
@@ -20,6 +31,12 @@ class QuestionsService {
 
   setActiveQuestion() {
     const firstQuestion = AppState.questions.shift()
+
+    if (!firstQuestion) {
+      this.getQuestions()
+      return
+    }
+
     AppState.activeQuestion = firstQuestion
   }
 

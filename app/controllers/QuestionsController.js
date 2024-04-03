@@ -29,5 +29,6 @@ export class QuestionsController {
 
   guessAnswer(answer) {
     console.log(answer);
+    questionsService.checkAnswer(answer)
   }
 }
